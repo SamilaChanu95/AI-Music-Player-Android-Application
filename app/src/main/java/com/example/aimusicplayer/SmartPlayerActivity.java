@@ -112,7 +112,20 @@ public class SmartPlayerActivity extends AppCompatActivity {
                 if (matchesFound != null)
                 {
                     keeper = matchesFound.get(0);
-                    Toast.makeText(SmartPlayerActivity.this, "Result = " + keeper, Toast.LENGTH_LONG).show();
+
+                    if (keeper.equals("pause the song") || keeper.equals("pause")) // Also that is the fixed commands
+                    {
+
+                        //then pause the song by call the function for pause the songs
+                        playPauseSong();
+                        Toast.makeText(SmartPlayerActivity.this, "Command = " + keeper, Toast.LENGTH_LONG).show();
+
+                    }
+                    else if (keeper.equals("play the song") || keeper.equals("play"))
+                    {
+                        playPauseSong();
+                        Toast.makeText(SmartPlayerActivity.this, "Command = ", Toast.LENGTH_LONG).show();
+                    }
                 }
 
             }
@@ -188,7 +201,7 @@ public class SmartPlayerActivity extends AppCompatActivity {
         songNameTxt.setText(songName);
         songNameTxt.setSelected(true);
 
-        position = bundle.getInt("Position",0);
+        position = bundle.getInt("position",0);
         Uri uri = Uri.parse(mySongs.get(position).toString());
 
         MediaPlayer mediaPlayer = MediaPlayer.create(SmartPlayerActivity.this, uri);
@@ -221,6 +234,26 @@ public class SmartPlayerActivity extends AppCompatActivity {
                 finish();
             }
         }
-
     }
+
+    //Create new function for the play and pause the song
+    private void playPauseSong()
+    {
+       imageView.setBackgroundResource(R.drawable.four);
+
+       if (myMediaPlayer.isPlaying())
+       {
+           pausePlayBtn.setImageResource(R.drawable.play);
+           myMediaPlayer.pause();
+
+       }
+       else
+       {
+           pausePlayBtn.setImageResource(R.drawable.pause);
+           myMediaPlayer.start();
+           imageView.setBackgroundResource(R.drawable.five); //change the logo
+       }
+    }
+
+
 }
