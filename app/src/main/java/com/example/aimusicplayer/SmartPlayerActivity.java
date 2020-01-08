@@ -71,7 +71,7 @@ public class SmartPlayerActivity extends AppCompatActivity {
 
         validateReceiveValuesAndStartPlaying();
 
-        imageView.setBackground(R.drawable.logo);
+        imageView.setBackgroundResource(R.drawable.logo);
 
         speechRecognizer.setRecognitionListener(new RecognitionListener() {
             @Override
