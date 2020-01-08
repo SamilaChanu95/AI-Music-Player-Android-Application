@@ -38,6 +38,7 @@ public class SmartPlayerActivity extends AppCompatActivity {
     private ImageView imageView;
     private RelativeLayout lowerRelativeLayout;
     private Button voiceEnabledBtn;
+    private String mode = "ON";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,6 @@ public class SmartPlayerActivity extends AppCompatActivity {
         imageView = findViewById(R.id.logo);
         voiceEnabledBtn = findViewById(R.id.voice_enable_btn);
         lowerRelativeLayout = findViewById(R.id.lower);
-
 
         parentRelativeLayout = findViewById(R.id.parentRelativeLayout); //Bind the parentRelativeLayout with Relativelayout in to that parentRelativeLayout variable
 
@@ -136,6 +136,25 @@ public class SmartPlayerActivity extends AppCompatActivity {
                 }
 
                 return false;
+            }
+        });
+
+        //handle the visibility of the voiceEnabled button with click the button
+        voiceEnabledBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mode.equals("ON"))
+                {
+                    mode = "OFF";
+                    voiceEnabledBtn.setText("Voice Enabled Mode - OFF");
+                    lowerRelativeLayout.setVisibility(view.VISIBLE);
+                }
+                else
+                {
+                    mode = "ON";
+                    voiceEnabledBtn.setText("Voice Enabled Mode - ON");
+                    lowerRelativeLayout.setVisibility(view.GONE);
+                }
             }
         });
 
