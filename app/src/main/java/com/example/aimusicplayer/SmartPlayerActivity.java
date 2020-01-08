@@ -16,7 +16,10 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -29,12 +32,29 @@ public class SmartPlayerActivity extends AppCompatActivity {
     private Intent speechRecognizerIntent;
     private String keeper = "";
 
+    private ImageView pausePlayBtn, nextBtn, previousBtn;
+    private TextView songNameTxt;
+
+    private ImageView imageView;
+    private RelativeLayout lowerRelativeLayout;
+    private Button voiceEnabledBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smart_player);
 
         checkVoiceCommandPermission();
+
+        pausePlayBtn = findViewById(R.id.play_pause_btn);
+        nextBtn = findViewById(R.id.next_btn);
+        previousBtn = findViewById(R.id.previous_btn);
+        songNameTxt = findViewById(R.id.songName);
+        imageView = findViewById(R.id.logo);
+        voiceEnabledBtn = findViewById(R.id.voice_enable_btn);
+        lowerRelativeLayout = findViewById(R.id.lower);
+
+
         parentRelativeLayout = findViewById(R.id.parentRelativeLayout); //Bind the parentRelativeLayout with Relativelayout in to that parentRelativeLayout variable
 
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(SmartPlayerActivity.this);
