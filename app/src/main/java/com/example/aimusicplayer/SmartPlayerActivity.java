@@ -69,7 +69,7 @@ public class SmartPlayerActivity extends AppCompatActivity {
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
 
-
+        validateReceiveValuesAndStartPlaying();
 
         imageView.setBackground(R.drawable.logo);
 
@@ -168,6 +168,31 @@ public class SmartPlayerActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void validateReceiveValuesAndStartPlaying()
+    {
+        if (myMediaPlayer != null)
+        {
+            myMediaPlayer.stop();
+            myMediaPlayer.release();
+        }
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+
+        mySongs = (ArrayList) bundle.getParcelableArrayList("song"); //Fill the array from the songs
+        mSongName = mySongs.get(position).getName();
+        String songName = intent.getStringExtra("name");
+
+        songNameTxt.setText(songName);
+        songNameTxt.setSelected(true);
+
+        position = bundle.getInt("Position",0);
+        Uri uri = Uri.parse(mySongs.get(position).toString());
+
+        MediaPlayer mediaPlayer = MediaPlayer.create(SmartPlayerActivity.this, uri);
+        mediaPlayer.start();
     }
 
 
