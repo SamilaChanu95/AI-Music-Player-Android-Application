@@ -3,8 +3,11 @@ package com.example.aimusicplayer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -92,5 +95,27 @@ public class MainActivity extends AppCompatActivity {
         //Get the data in to the ArrayAdapter from itemsAll array
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, itemsAll);
         mSongsList.setAdapter(arrayAdapter);
+
+        //Method for allow to any user to select the list items in the list
+        mSongsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                String songName = mSongsList.getItemAtPosition(i).toString();
+
+                Intent intent = new Intent(MainActivity.this, SmartPlayerActivity.class);
+                intent.putExtra("song", audioSongs);
+                intent.putExtra("name", songName);
+                intent.putExtra("position", i);
+                startActivity(intent);
+
+            }
+        });
+
+
     }
+
+
+
+
 }
