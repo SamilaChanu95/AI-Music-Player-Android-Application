@@ -7,6 +7,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -39,6 +41,11 @@ public class SmartPlayerActivity extends AppCompatActivity {
     private RelativeLayout lowerRelativeLayout;
     private Button voiceEnabledBtn;
     private String mode = "ON";
+
+    private MediaPlayer myMediaPlayer;
+    private int position;
+    private ArrayList<File> mySongs; //For get the list of songs from the MainActivity as Files
+    private String mSongName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +69,9 @@ public class SmartPlayerActivity extends AppCompatActivity {
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
 
+
+
+        imageView.setBackground(R.drawable.logo);
 
         speechRecognizer.setRecognitionListener(new RecognitionListener() {
             @Override
